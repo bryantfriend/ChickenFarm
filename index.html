@@ -13,38 +13,52 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            background-color: #0f172a; /* bg-slate-900 */
         }
-  .hero-bg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('conceptArt.png');
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8));
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
         }
-        .parallax-bg {
-            background-image: url('https://placehold.co/1200x800/475569/e2e8f0?text=Technopark+Site+Plan');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
-        .step-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
         }
-        .step-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            background-color: #1e40af; /* A darker blue on hover */
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: rotate(20deg);
+            animation: shine 5s infinite linear;
         }
-        .stat-card {
-            transition: transform 0.3s ease;
+        @keyframes shine {
+            0% { transform: translateX(-75%) rotate(20deg); }
+            100% { transform: translateX(75%) rotate(20deg); }
         }
-        .stat-card:hover {
-            transform: scale(1.05);
-        }
-        [data-lang] { display: none; }
-        [data-lang="en"].active { display: block; }
-        [data-lang-inline] { display: none; }
-        [data-lang-inline="en"].active { display: inline; }
+        [data-lang]:not(.active), [data-lang-inline]:not(.active) { display: none; }
+        [data-lang].active { display: block; }
+        [data-lang-inline].active { display: inline; }
         .lang-flag {
             cursor: pointer;
             transition: transform 0.2s ease, opacity 0.2s ease;
@@ -65,6 +79,49 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Horizontal Scroll Section */
+        .horizontal-scroll-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #3b82f6 #1e293b;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar { height: 8px; }
+        .horizontal-scroll-container::-webkit-scrollbar-track { background: #1e293b; }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb { background-color: #3b82f6; border-radius: 10px; border: 2px solid #1e293b; }
+        
+        .timeline { display: inline-block; position: relative; padding: 50px 0; }
+        .timeline-line { position: absolute; top: 50%; left: 0; height: 8px; background: #374151; width: 100%; transform: translateY(-50%); }
+        .timeline-progress { position: absolute; top: 0; left: 0; height: 100%; background: #3b82f6; width: 0; transition: width 0.3s linear; }
+        .timeline-item { display: inline-block; vertical-align: top; width: 250px; text-align: center; position: relative; transition: transform 0.3s ease; cursor: pointer; }
+        .timeline-item.active { transform: scale(1.1); }
+        .timeline-dot { width: 24px; height: 24px; background: #374151; border-radius: 50%; border: 4px solid #0f172a; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: background-color 0.3s ease; }
+        .timeline-item.active .timeline-dot { background: #3b82f6; }
+        .timeline-content { padding: 20px; margin-top: -30px; }
+        .timeline-item:nth-child(odd) .timeline-content { margin-top: 0; padding-top: 80px; }
+        #hide-icon { position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%); font-size: 2.5rem; color: #93c5fd; transition: left 0.3s linear; z-index: 10; }
+
+        /* 3D Flip Card */
+        .flip-card { background-color: transparent; width: 100%; height: 180px; perspective: 1000px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; border-radius: 0.5rem; }
+        .flip-card-front { background-color: #1e293b; /* slate-800 */ border: 4px solid #3b82f6; }
+        .flip-card-back { background-color: #3b82f6; /* blue-500 */ transform: rotateY(180deg); }
+
+        /* Investment Calculator */
+        #investment-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 10px; background: #334155; border-radius: 5px; outline: none; transition: opacity .2s; }
+        #investment-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 25px; height: 25px; background: #3b82f6; cursor: pointer; border-radius: 50%; border: 4px solid #93c5fd; }
+        #investment-slider::-moz-range-thumb { width: 25px; height: 25px; background: #3b82f6; cursor: pointer; border-radius: 50%; border: 4px solid #93c5fd; }
+        .impact-icon { transition: color 0.3s ease, transform 0.3s ease; }
+        
+        /* Modal */
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .modal-content { transition: transform 0.3s ease, opacity 0.3s ease; }
+
     </style>
 </head>
 <body class="bg-slate-900 text-white">
@@ -72,9 +129,7 @@
     <!-- Header -->
     <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50 py-4 px-4 md:px-8 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-bold tracking-tight text-blue-400">
-                <i class="fas fa-leaf mr-2"></i>Kyrgyz Agroholding
-            </h1>
+            <h1 class="text-xl md:text-2xl font-bold tracking-tight text-blue-400"><i class="fas fa-leaf mr-2"></i>Kyrgyz Agroholding</h1>
             <div class="flex items-center space-x-4">
                 <img src="https://flagcdn.com/gb.svg" width="30" alt="English" class="lang-flag rounded-full" data-lang-switch="en">
                 <img src="https://flagcdn.com/ru.svg" width="30" alt="Russian" class="lang-flag rounded-full" data-lang-switch="ru">
@@ -84,351 +139,333 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-bg h-screen flex flex-col justify-center items-center text-center p-4 -mt-20">
-        <div class="max-w-4xl">
-            <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider fade-in">
-                <span data-lang-inline="en" class="active">Forging a New Era</span>
-                <span data-lang-inline="ru">Создавая новую эру</span>
-                <span data-lang-inline="kg">Жаңы доорду түзүү</span>
+    <section class="hero-bg h-screen flex flex-col justify-center items-center text-center p-4 -mt-20 relative">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider fade-in gradient-text shine-effect">
+                <span data-lang-inline="en" class="active">Forging a New Era</span><span data-lang-inline="ru">Создавая новую эру</span><span data-lang-inline="kg">Жаңы доорду түзүү</span>
             </h2>
             <p class="mt-4 text-lg md:text-2xl text-blue-300 font-light max-w-2xl mx-auto fade-in" style="transition-delay: 200ms;">
-                <span data-lang-inline="en" class="active">A 2 billion som investment creating 500 jobs and revolutionizing our nation's industrial landscape.</span>
-                <span data-lang-inline="ru">Инвестиции в 2 миллиарда сомов создадут 500 рабочих мест и произведут революцию в промышленном ландшафте нашей страны.</span>
-                <span data-lang-inline="kg">2 миллиард сомдук инвестиция 500 жумуш ордун түзүп, өлкөбүздүн өнөр жай ландшафтын өзгөртөт.</span>
+                <span data-lang-inline="en" class="active">A 2 billion som investment creating 500 jobs and revolutionizing our nation's industrial landscape.</span><span data-lang-inline="ru">Инвестиции в 2 миллиарда сомов создадут 500 рабочих мест и произведут революцию в промышленном ландшафте нашей страны.</span><span data-lang-inline="kg">2 миллиард сомдук инвестиция 500 жумуш ордун түзүп, өлкөбүздүн өнөр жай ландшафтын өзгөртөт.</span>
             </p>
         </div>
-        <div id="countdown" class="mt-12 text-center fade-in" style="transition-delay: 400ms;">
-            <h3 class="text-2xl font-bold text-white mb-4">
-                <span data-lang-inline="en" class="active">Grand Opening Countdown</span>
-                <span data-lang-inline="ru">Обратный отсчет до открытия</span>
-                <span data-lang-inline="kg">Ачылышына чейинки эсеп</span>
-            </h3>
+        <div id="countdown" class="mt-12 text-center fade-in hero-content" style="transition-delay: 400ms;">
+            <h3 class="text-2xl font-bold text-white mb-4"><span data-lang-inline="en" class="active">Grand Opening Countdown</span><span data-lang-inline="ru">Обратный отсчет до открытия</span><span data-lang-inline="kg">Ачылышына чейинки эсеп</span></h3>
             <div class="grid grid-cols-4 gap-4 text-white max-w-lg mx-auto">
-                <div class="bg-white/10 p-4 rounded-lg">
-                    <div id="days" class="text-4xl font-bold">0</div>
-                    <div data-lang-inline="en" class="active">Days</div>
-                    <div data-lang-inline="ru">Дней</div>
-                    <div data-lang-inline="kg">Күн</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg">
-                    <div id="hours" class="text-4xl font-bold">0</div>
-                    <div data-lang-inline="en" class="active">Hours</div>
-                    <div data-lang-inline="ru">Часов</div>
-                    <div data-lang-inline="kg">Саат</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg">
-                    <div id="minutes" class="text-4xl font-bold">0</div>
-                    <div data-lang-inline="en" class="active">Minutes</div>
-                    <div data-lang-inline="ru">Минут</div>
-                    <div data-lang-inline="kg">Мүнөт</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg">
-                    <div id="seconds" class="text-4xl font-bold">0</div>
-                    <div data-lang-inline="en" class="active">Seconds</div>
-                    <div data-lang-inline="ru">Секунд</div>
-                    <div data-lang-inline="kg">Секунд</div>
-                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg"><div id="days" class="text-4xl font-bold">0</div><div data-lang-inline="en" class="active">Days</div><div data-lang-inline="ru">Дней</div><div data-lang-inline="kg">Күн</div></div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg"><div id="hours" class="text-4xl font-bold">0</div><div data-lang-inline="en" class="active">Hours</div><div data-lang-inline="ru">Часов</div><div data-lang-inline="kg">Саат</div></div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg"><div id="minutes" class="text-4xl font-bold">0</div><div data-lang-inline="en" class="active">Minutes</div><div data-lang-inline="ru">Минут</div><div data-lang-inline="kg">Мүнөт</div></div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg"><div id="seconds" class="text-4xl font-bold">0</div><div data-lang-inline="en" class="active">Seconds</div><div data-lang-inline="ru">Секунд</div><div data-lang-inline="kg">Секунд</div></div>
             </div>
         </div>
     </section>
-
-    <!-- Vision Section -->
-    <section class="py-20 bg-slate-800">
-        <div class="container mx-auto px-4 text-center">
-            <div class="max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in">
-                    <span data-lang-inline="en" class="active">A Vision for a Modern Technopark</span>
-                    <span data-lang-inline="ru">Видение современного технопарка</span>
-                    <span data-lang-inline="kg">Заманбап технопарктын көрүнүшү</span>
-                </h2>
-                <p class="text-lg text-slate-300 mb-12 fade-in">
-                    <span data-lang-inline="en" class="active">We're not just building a factory; we're building a future. The Kyrgyz Agroholding Technopark will rise as a beacon of innovation and opportunity.</span>
-                    <span data-lang-inline="ru">Мы строим не просто завод; мы строим будущее. Технопарк «Кыргыз Агрохолдинг» станет маяком инноваций и возможностей.</span>
-                    <span data-lang-inline="kg">Биз жөн гана завод курбайбыз; биз келечекти куруп жатабыз. "Кыргыз Агрохолдинг" технопаркы инновациялардын жана мүмкүнчүлүктөрдүн маягы болуп калат.</span>
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Stat Card -->
-                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
-                    <i class="fas fa-ruler-combined text-blue-400 text-4xl mb-4"></i>
-                    <h3 class="text-2xl font-bold">105 <span data-lang-inline="en" class="active">ha</span><span data-lang-inline="ru">га</span><span data-lang-inline="kg">га</span></h3>
-                    <p class="text-slate-300"><span data-lang-inline="en" class="active">Technopark Area</span><span data-lang-inline="ru">Площадь технопарка</span><span data-lang-inline="kg">Технопарктын аянты</span></p>
-                </div>
-                <!-- Stat Card -->
-                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
-                    <i class="fas fa-users text-blue-400 text-4xl mb-4"></i>
-                    <h3 class="text-2xl font-bold">500</h3>
-                    <p class="text-slate-300"><span data-lang-inline="en" class="active">New Jobs</span><span data-lang-inline="ru">Новых рабочих мест</span><span data-lang-inline="kg">Жаңы жумуш орундары</span></p>
-                </div>
-                <!-- Stat Card -->
-                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
-                    <i class="fas fa-weight-hanging text-blue-400 text-4xl mb-4"></i>
-                    <h3 class="text-2xl font-bold">8.76M <span data-lang-inline="en" class="active">kg</span><span data-lang-inline="ru">кг</span><span data-lang-inline="kg">кг</span></h3>
-                    <p class="text-slate-300"><span data-lang-inline="en" class="active">Hides Processed Annually</span><span data-lang-inline="ru">Обработка шкур в год</span><span data-lang-inline="kg">Жылына иштетилген тери</span></p>
-                </div>
-                <!-- Stat Card -->
-                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
-                    <i class="fas fa-recycle text-blue-400 text-4xl mb-4"></i>
-                    <h3 class="text-2xl font-bold">4000 m³/<span data-lang-inline="en" class="active">day</span><span data-lang-inline="ru">день</span><span data-lang-inline="kg">күн</span></h3>
-                    <p class="text-slate-300"><span data-lang-inline="en" class="active">Water Treatment Capacity</span><span data-lang-inline="ru">Мощность очистки воды</span><span data-lang-inline="kg">Суу тазалоо кубаттуулугу</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Parallax Background Section -->
-    <section class="parallax-bg h-96"></section>
 
     <!-- Asyl Teri Section -->
-    <section class="py-20 bg-slate-900">
+    <section class="py-20 bg-slate-800">
         <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in">
-                    <span data-lang-inline="en" class="active">The Heart of the Project: </span>
-                    <span data-lang-inline="ru">Сердце проекта: </span>
-                    <span data-lang-inline="kg">Долбоордун жүрөгү: </span>
-                    "Asyl Teri"
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in gradient-text">
+                    <span data-lang-inline="en" class="active">The Heart of the Project: </span><span data-lang-inline="ru">Сердце проекта: </span><span data-lang-inline="kg">Долбоордун жүрөгү: </span>"Asyl Teri"
                 </h2>
-                <p class="text-lg text-slate-300 mb-4 fade-in">
-                    <span data-lang-inline="en" class="active">Blending traditional craftsmanship with cutting-edge technology to create world-class leather. Follow the journey from raw hide to finished product.</span>
-                    <span data-lang-inline="ru">Сочетание традиционного мастерства с передовыми технологиями для создания кожи мирового класса. Проследите путь от сырой шкуры до готового продукта.</span>
-                    <span data-lang-inline="kg">Дүйнөлүк класстагы булгаары жасоо үчүн салттуу чеберчиликти заманбап технологиялар менен айкалыштыруу. Чийки териден даяр продукцияга чейинки жолду байкаңыз.</span>
-                </p>
+                <p class="text-lg text-slate-300 mb-4 fade-in"><span data-lang-inline="en" class="active">Click on our mission pillars to learn more!</span><span data-lang-inline="ru">Нажмите на столпы нашей миссии, чтобы узнать больше!</span><span data-lang-inline="kg">Биздин миссиянын негиздери жөнүндө көбүрөөк билүү үчүн басыңыз!</span></p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Leather Process Steps -->
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">1</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Primary Processing</span>
-                        <span data-lang="ru">Первичная обработка</span>
-                        <span data-lang="kg">Баштапкы иштетүү</span>
-                    </h4>
+
+             <!-- Our Mission -->
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 my-16 text-center">
+                <!-- Flip Card 1 -->
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><i class="fas fa-hand-holding-heart text-blue-400 text-4xl mb-4"></i><h4 class="text-xl font-bold mb-2"><span data-lang-inline="en" class="active">Empower Farmers</span><span data-lang-inline="ru">Поддержка фермеров</span><span data-lang-inline="kg">Фермерлерди колдоо</span></h4></div>
+                        <div class="flip-card-back"><p><span data-lang-inline="en" class="active">Creating a reliable, profitable market for local cattle breeders.</span><span data-lang-inline="ru">Создание надежного, прибыльного рынка для местных скотоводов.</span><span data-lang-inline="kg">Жергиликтүү малчылар үчүн ишенимдүү, кирешелүү базар түзүү.</span></p></div>
+                    </div>
                 </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">2</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Soaking</span>
-                        <span data-lang="ru">Отмока</span>
-                        <span data-lang="kg">Чылоо</span>
-                    </h4>
+                <!-- Flip Card 2 -->
+                <div class="flip-card fade-in" style="transition-delay: 100ms;" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><i class="fas fa-mountain-sun text-blue-400 text-4xl mb-4"></i><h4 class="text-xl font-bold mb-2"><span data-lang-inline="en" class="active">Boost Rural Areas</span><span data-lang-inline="ru">Развитие сел</span><span data-lang-inline="kg">Айыл аймактарын өнүктүрүү</span></h4></div>
+                        <div class="flip-card-back"><p><span data-lang-inline="en" class="active">Driving economic growth and creating jobs right where they're needed most.</span><span data-lang-inline="ru">Стимулирование экономического роста и создание рабочих мест там, где они больше всего нужны.</span><span data-lang-inline="kg">Экономикалык өсүштү камсыз кылуу жана эң зарыл болгон жерлерде жумуш орундарын түзүү.</span></p></div>
+                    </div>
                 </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">3</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">De-hairing & Liming</span>
-                        <span data-lang="ru">Обезволашивание и золение</span>
-                        <span data-lang="kg">Түгүн алуу жана акиташтоо</span>
-                    </h4>
+                <!-- Flip Card 3 -->
+                <div class="flip-card fade-in" style="transition-delay: 200ms;" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><i class="fas fa-globe-americas text-blue-400 text-4xl mb-4"></i><h4 class="text-xl font-bold mb-2"><span data-lang-inline="en" class="active">Go Global</span><span data-lang-inline="ru">Выход на мир</span><span data-lang-inline="kg">Дүйнөгө чыгуу</span></h4></div>
+                        <div class="flip-card-back"><p><span data-lang-inline="en" class="active">Producing export-quality goods that showcase Kyrgyz excellence on the world stage.</span><span data-lang-inline="ru">Производство экспортно-качественных товаров, демонстрирующих кыргызское превосходство на мировой арене.</span><span data-lang-inline="kg">Дүйнөлүк аренада кыргыз мыктылыгын көрсөткөн экспорттук сапаттагы товарларды өндүрүү.</span></p></div>
+                    </div>
                 </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">4</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Fleshing</span>
-                        <span data-lang="ru">Мездрение</span>
-                        <span data-lang="kg">Эттендирүү</span>
-                    </h4>
+                <!-- Flip Card 4 -->
+                <div class="flip-card fade-in" style="transition-delay: 300ms;" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><i class="fas fa-cogs text-blue-400 text-4xl mb-4"></i><h4 class="text-xl font-bold mb-2"><span data-lang-inline="en" class="active">Innovate & Sustain</span><span data-lang-inline="ru">Инновации и экология</span><span data-lang-inline="kg">Инновация жана туруктуулук</span></h4></div>
+                        <div class="flip-card-back"><p><span data-lang-inline="en" class="active">Using cutting-edge, environmentally friendly technology to maximize value and minimize waste.</span><span data-lang-inline="ru">Использование передовых, экологически чистых технологий для максимизации ценности и минимизации отходов.</span><span data-lang-inline="kg">Баалуулукту жогорулатуу жана калдыктарды азайтуу үчүн алдыңкы, экологиялык таза технологияларды колдонуу.</span></p></div>
+                    </div>
                 </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">5</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Splitting</span>
-                        <span data-lang="ru">Двоение</span>
-                        <span data-lang="kg">Катмарга бөлүү</span>
-                    </h4>
-                </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">6</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Deliming & Pickling</span>
-                        <span data-lang="ru">Обеззоливание и пикелевание</span>
-                        <span data-lang="kg">Акиташсыздандыруу жана пикелдөө</span>
-                    </h4>
-                </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">7</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Tanning</span>
-                        <span data-lang="ru">Дубление</span>
-                        <span data-lang="kg">Ашатуу</span>
-                    </h4>
-                </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">8</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Wet-Blue Sorting</span>
-                        <span data-lang="ru">Сортировка Вет-блю</span>
-                        <span data-lang="kg">Вет-блю сорттоо</span>
-                    </h4>
-                </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">9</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Dyeing & Fatliquoring</span>
-                        <span data-lang="ru">Крашение и жирование</span>
-                        <span data-lang="kg">Боёо жана майлоо</span>
-                    </h4>
-                </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">10</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Drying</span>
-                        <span data-lang="ru">Сушка</span>
-                        <span data-lang="kg">Кургатуу</span>
-                    </h4>
-                </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">11</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Finishing & Coating</span>
-                        <span data-lang="ru">Отделка и покрытие</span>
-                        <span data-lang="kg">Аяктоо жана каптоо</span>
-                    </h4>
-                </div>
-                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
-                    <div class="text-3xl font-bold text-blue-300 mb-2">12</div>
-                    <h4 class="font-semibold h-12 flex items-center justify-center">
-                        <span data-lang="en" class="active">Final Processing</span>
-                        <span data-lang="ru">Финальная обработка</span>
-                        <span data-lang="kg">Акыркы иштетүү</span>
-                    </h4>
-                </div>
+            </div>
+            
+            <div class="text-center mb-8">
+                 <p class="text-lg text-slate-300 fade-in"><span data-lang-inline="en" class="active">Scroll the factory line and click a station to see how we craft our world-class leather!</span><span data-lang-inline="ru">Прокрутите заводскую линию и нажмите на станцию, чтобы увидеть, как мы создаем нашу кожу мирового класса!</span><span data-lang-inline="kg">Дүйнөлүк класстагы булгаарыбызды кантип жаратканыбызды көрүү үчүн заводдун линиясын жылдырып, станцияны басыңыз!</span></p>
+            </div>
+            
+            <!-- Horizontal Scroll Factory -->
+            <div id="factory-line-container" class="horizontal-scroll-container bg-slate-900 p-4 rounded-xl shadow-inner relative">
+                <div id="factory-timeline" class="timeline" style="width: 3000px;"></div>
             </div>
         </div>
     </section>
 
     <!-- Investment Section -->
-    <section class="py-20 bg-slate-800">
+    <section class="py-20 bg-slate-900">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in">
-                    <span data-lang-inline="en" class="active">Invest in Growth. Invest in Kyrgyzstan.</span>
-                    <span data-lang-inline="ru">Инвестируйте в рост. Инвестируйте в Кыргызстан.</span>
-                    <span data-lang-inline="kg">Өсүүгө инвестицияла. Кыргызстанга инвестицияла.</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in gradient-text">
+                    <span data-lang-inline="en" class="active">Calculate Your Impact!</span><span data-lang-inline="ru">Рассчитайте свой вклад!</span><span data-lang-inline="kg">Өз салымыңызды эсептеңиз!</span>
                 </h2>
                 <p class="text-lg text-slate-300 mb-4 fade-in">
-                    <span data-lang-inline="en" class="active">A transparent and impactful investment opportunity in a vital sector of Kyrgyzstan's economy.</span>
-                    <span data-lang-inline="ru">Прозрачная и эффективная инвестиционная возможность в жизненно важном секторе экономики Кыргызстана.</span>
-                    <span data-lang-inline="kg">Кыргызстандын экономикасынын маанилүү секторуна ачык-айкын жана таасирдүү инвестициялык мүмкүнчүлүк.</span>
+                    <span data-lang-inline="en" class="active">Slide to see how a hypothetical investment can fuel our growth. This is for illustrative purposes only.</span><span data-lang-inline="ru">Передвиньте ползунок, чтобы увидеть, как гипотетические инвестиции могут способствовать нашему росту. Только в иллюстративных целях.</span><span data-lang-inline="kg">Гипотетикалык инвестициялар биздин өсүшүбүзгө кантип түрткү болорун көрүү үчүн сыдырманы жылдырыңыз. Бул иллюстрациялык максаттар үчүн гана.</span>
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="bg-slate-700 p-8 rounded-lg fade-in">
-                    <i class="fas fa-coins text-yellow-400 text-5xl mb-4"></i>
-                    <p class="text-lg text-slate-400"><span data-lang-inline="en" class="active">Total Investment</span><span data-lang-inline="ru">Общие инвестиции</span><span data-lang-inline="kg">Жалпы инвестиция</span></p>
-                    <h3 class="text-4xl font-bold">2B <span data-lang-inline="en" class="active">SOM</span><span data-lang-inline="ru">сом</span><span data-lang-inline="kg">сом</span></h3>
+            <div class="bg-slate-800 p-8 rounded-lg max-w-4xl mx-auto">
+                <div class="mb-6">
+                    <input type="range" min="0" max="100" value="10" class="slider" id="investment-slider">
                 </div>
-                <div class="bg-slate-700 p-8 rounded-lg fade-in">
-                    <i class="fas fa-dollar-sign text-green-400 text-5xl mb-4"></i>
-                    <p class="text-lg text-slate-400">"Asyl Teri" <span data-lang-inline="en" class="active">Tannery</span><span data-lang-inline="ru">завод</span><span data-lang-inline="kg">заводу</span></p>
-                    <h3 class="text-4xl font-bold">$12M</h3>
+                <div class="text-center mb-8">
+                    <p class="text-xl"><span data-lang-inline="en" class="active">Your hypothetical investment:</span><span data-lang-inline="ru">Ваши гипотетические инвестиции:</span><span data-lang-inline="kg">Сиздин гипотетикалык инвестицияңыз:</span> <span id="investment-amount" class="text-3xl font-bold text-green-400"></span></p>
                 </div>
-                <div class="bg-slate-700 p-8 rounded-lg fade-in">
-                    <i class="fas fa-cogs text-sky-400 text-5xl mb-4"></i>
-                    <p class="text-lg text-slate-400"><span data-lang-inline="en" class="active">Production Equipment</span><span data-lang-inline="ru">Производственное оборудование</span><span data-lang-inline="kg">Өндүрүш жабдуулары</span></p>
-                    <h3 class="text-4xl font-bold">>$5M</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-center"><i class="fas fa-users mr-2"></i><span data-lang-inline="en" class="active">Jobs Supported</span><span data-lang-inline="ru">Поддержано рабочих мест</span><span data-lang-inline="kg">Колдоого алынган жумуш орундары</span></h4>
+                        <div id="jobs-impact" class="grid grid-cols-10 gap-2 text-2xl text-slate-600"></div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-center"><i class="fas fa-industry mr-2"></i><span data-lang-inline="en" class="active">Factory Space Funded</span><span data-lang-inline="ru">Профинансировано площади</span><span data-lang-inline="kg">Каржыланган аянт</span></h4>
+                        <div id="space-impact" class="grid grid-cols-10 gap-2 text-2xl text-slate-600"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 py-8 text-center text-slate-400">
+    <footer class="bg-slate-800 py-8 text-center text-slate-400">
         <p>&copy; 2025 Kyrgyz Agroholding. <span data-lang-inline="en" class="active">All Rights Reserved.</span><span data-lang-inline="ru">Все права защищены.</span><span data-lang-inline="kg">Бардык укуктар корголгон.</span></p>
-        <div class="mt-4">
-            <a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-facebook fa-2x"></i></a>
-            <a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-instagram fa-2x"></i></a>
-            <a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-telegram fa-2x"></i></a>
-        </div>
+        <div class="mt-4"><a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-facebook fa-2x"></i></a><a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-instagram fa-2x"></i></a><a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-telegram fa-2x"></i></a></div>
     </footer>
-
+    
+    <!-- Modal -->
+    <div id="step-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4 hidden opacity-0">
+        <div class="modal-content bg-slate-800 rounded-lg shadow-2xl p-8 max-w-md w-full text-center opacity-0 -translate-y-10">
+            <i id="modal-icon" class="text-blue-400 text-6xl mb-4"></i>
+            <h3 id="modal-title" class="text-2xl font-bold mb-2"></h3>
+            <p id="modal-description" class="text-slate-300"></p>
+            <button id="modal-close" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                <span data-lang-inline="en" class="active">Close</span>
+                <span data-lang-inline="ru">Закрыть</span>
+                <span data-lang-inline="kg">Жабуу</span>
+            </button>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Language Data ---
+            const stepDetails = {
+                en: [
+                    { icon: 'fa-hand-sparkles', title: 'Primary Processing', desc: 'The initial preparation and preservation of the raw cattle hides to ensure quality.' },
+                    { icon: 'fa-tint', title: 'Soaking', desc: 'Rehydrating the preserved hides in water to make them pliable and clean.' },
+                    { icon: 'fa-cut', title: 'De-hairing & Liming', desc: 'Removing hair and opening up the fiber structure using a lime solution.' },
+                    { icon: 'fa-layer-group', title: 'Fleshing', desc: 'Removing excess flesh, fat, and tissue from the inner side of the hide.' },
+                    { icon: 'fa-clone', title: 'Splitting', desc: 'Dividing the hide into a top grain layer and a bottom flesh layer.' },
+                    { icon: 'fa-flask', title: 'Deliming & Pickling', desc: 'Adjusting the pH level of the hide to prepare it for the tanning agents.' },
+                    { icon: 'fa-shield-alt', title: 'Tanning', desc: 'The crucial step of converting the hide into durable leather using tanning agents.' },
+                    { icon: 'fa-check-double', title: 'Wet-Blue Sorting', desc: 'Grading the tanned hides (now called "wet-blue") based on quality and thickness.' },
+                    { icon: 'fa-palette', title: 'Dyeing & Fatliquoring', desc: 'Coloring the leather and incorporating oils to ensure softness and flexibility.' },
+                    { icon: 'fa-wind', title: 'Drying', desc: 'Carefully drying the leather to the required moisture content using various methods.' },
+                    { icon: 'fa-paint-brush', title: 'Finishing & Coating', desc: 'Applying a protective and aesthetic topcoat to the leather surface.' },
+                    { icon: 'fa-gem', title: 'Final Processing', desc: 'The concluding quality checks and processes to ensure the leather meets all specifications.' }
+                ],
+                ru: [
+                    { icon: 'fa-hand-sparkles', title: 'Первичная обработка', desc: 'Начальная подготовка и консервация сырых бычьих шкур для обеспечения качества.' },
+                    { icon: 'fa-tint', title: 'Отмока', desc: 'Повторное увлажнение консервированных шкур в воде для придания им гибкости и чистоты.' },
+                    { icon: 'fa-cut', title: 'Обезволашивание и золение', desc: 'Удаление волос и раскрытие структуры волокон с помощью известкового раствора.' },
+                    { icon: 'fa-layer-group', title: 'Мездрение', desc: 'Удаление излишков мяса, жира и тканей с внутренней стороны шкуры.' },
+                    { icon: 'fa-clone', title: 'Двоение', desc: 'Разделение шкуры на верхний лицевой слой и нижний мездровый слой.' },
+                    { icon: 'fa-flask', title: 'Обеззоливание и пикелевание', desc: 'Регулировка уровня pH шкуры для подготовки к дубильным веществам.' },
+                    { icon: 'fa-shield-alt', title: 'Дубление', desc: 'Ключевой этап превращения шкуры в прочную кожу с помощью дубильных веществ.' },
+                    { icon: 'fa-check-double', title: 'Сортировка Вет-блю', desc: 'Сортировка дубленых шкур (теперь называемых «вет-блю») по качеству и толщине.' },
+                    { icon: 'fa-palette', title: 'Крашение и жирование', desc: 'Окрашивание кожи и введение масел для обеспечения мягкости и гибкости.' },
+                    { icon: 'fa-wind', title: 'Сушка', desc: 'Тщательная сушка кожи до необходимого содержания влаги различными методами.' },
+                    { icon: 'fa-paint-brush', title: 'Отделка и покрытие', desc: 'Нанесение защитного и эстетического верхнего покрытия на поверхность кожи.' },
+                    { icon: 'fa-gem', title: 'Финальная обработка', desc: 'Заключительные проверки качества и процессы, гарантирующие соответствие кожи всем спецификациям.' }
+                ],
+                kg: [
+                    { icon: 'fa-hand-sparkles', title: 'Баштапкы иштетүү', desc: 'Сапатты камсыз кылуу үчүн чийки бодо малдын терисин алгачкы даярдоо жана консервациялоо.' },
+                    { icon: 'fa-tint', title: 'Чылоо', desc: 'Консервацияланган терилерди ийкемдүү жана таза кылуу үчүн сууга кайрадан нымдоо.' },
+                    { icon: 'fa-cut', title: 'Түгүн алуу жана акиташтоо', desc: 'Акиташ эритмесин колдонуп, түктөрдү кетирүү жана була структурасын ачуу.' },
+                    { icon: 'fa-layer-group', title: 'Эттендирүү', desc: 'Теринин ички бетинен ашыкча этти, майды жана ткандарды алып салуу.' },
+                    { icon: 'fa-clone', title: 'Катмарга бөлүү', desc: 'Терини үстүнкү дан катмарына жана астыңкы эт катмарына бөлүү.' },
+                    { icon: 'fa-flask', title: 'Акиташсыздандыруу жана пикелдөө', desc: 'Терини ашатуучу заттарга даярдоо үчүн анын рН деңгээлин жөндөө.' },
+                    { icon: 'fa-shield-alt', title: 'Ашатуу', desc: 'Терини ашатуучу заттардын жардамы менен бышык булгаарыга айландыруунун негизги этабы.' },
+                    { icon: 'fa-check-double', title: 'Вет-блю сорттоо', desc: 'Ашатылган терилерди («вет-блю» деп аталат) сапаты жана калыңдыгы боюнча сорттоо.' },
+                    { icon: 'fa-palette', title: 'Боёо жана майлоо', desc: 'Булгаарыны боёо жана жумшактыгын, ийкемдүүлүгүн камсыз кылуу үчүн майларды кошуу.' },
+                    { icon: 'fa-wind', title: 'Кургатуу', desc: 'Булгаарыны ар кандай ыкмалар менен керектүү нымдуулукка чейин кылдат кургатуу.' },
+                    { icon: 'fa-paint-brush', title: 'Аяктоо жана каптоо', desc: 'Булгаарынын бетине коргоочу жана эстетикалык үстүнкү катмарды колдонуу.' },
+                    { icon: 'fa-gem', title: 'Акыркы иштетүү', desc: 'Булгаарынын бардык спецификацияларга жооп беришин камсыз кылуу үчүн акыркы сапатты текшерүү жана процесстер.' }
+                ]
+            };
+
             // --- Language Switcher ---
             const langSwitchers = document.querySelectorAll('[data-lang-switch]');
-            const langElements = document.querySelectorAll('[data-lang], [data-lang-inline]');
-            
-            function setLanguage(lang) {
-                // Set active flag
-                langSwitchers.forEach(switcher => {
-                    if (switcher.dataset.langSwitch === lang) {
-                        switcher.classList.add('selected');
-                    } else {
-                        switcher.classList.remove('selected');
-                    }
-                });
+            let currentLang = localStorage.getItem('preferredLanguage') || 'en';
 
-                // Toggle content visibility
-                langElements.forEach(el => {
-                    if (el.dataset.lang === lang || el.dataset.langInline === lang) {
-                        el.classList.add('active');
-                    } else {
-                        el.classList.remove('active');
-                    }
+            function setLanguage(lang) {
+                currentLang = lang;
+                langSwitchers.forEach(s => s.classList.toggle('selected', s.dataset.langSwitch === lang));
+                document.querySelectorAll('[data-lang], [data-lang-inline]').forEach(el => {
+                    const key = el.dataset.lang ? 'lang' : 'langInline';
+                    el.classList.toggle('active', el.dataset[key] === lang);
                 });
                 localStorage.setItem('preferredLanguage', lang);
+                buildFactoryTimeline();
             }
 
-            langSwitchers.forEach(switcher => {
-                switcher.addEventListener('click', () => {
-                    setLanguage(switcher.dataset.langSwitch);
-                });
-            });
-
-            // Set initial language from storage or default to 'en'
-            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
-            setLanguage(preferredLanguage);
-
+            langSwitchers.forEach(s => s.addEventListener('click', () => setLanguage(s.dataset.langSwitch)));
+            
+            // --- Particles.js ---
+            particlesJS('particles-js', { particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: "#3b82f6" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#3b82f6", opacity: 0.4, width: 1 }, move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out" } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } } }, retina_detect: true });
 
             // --- Countdown Timer ---
             const countdownDate = new Date("July 1, 2026 00:00:00").getTime();
-
-            const timer = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countdownDate - now;
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById("days").innerText = days;
-                document.getElementById("hours").innerText = hours;
-                document.getElementById("minutes").innerText = minutes;
-                document.getElementById("seconds").innerText = seconds;
-
+            const timer = setInterval(() => {
+                const distance = countdownDate - new Date().getTime();
                 if (distance < 0) {
                     clearInterval(timer);
-                    document.getElementById("countdown").innerHTML = `<h3 class="text-3xl font-bold text-green-400">
-                        <span data-lang-inline="en" class="active">We are open!</span>
-                        <span data-lang-inline="ru">Мы открыты!</span>
-                        <span data-lang-inline="kg">Биз ачыкпыз!</span>
-                    </h3>`;
-                    setLanguage(localStorage.getItem('preferredLanguage') || 'en'); // Re-apply lang after innerHTML change
+                    document.getElementById("countdown").innerHTML = `<h3 class="text-3xl font-bold text-green-400"><span data-lang-inline="en" class="active">We are open!</span><span data-lang-inline="ru">Мы открыты!</span><span data-lang-inline="kg">Биз ачыкпыз!</span></h3>`;
+                    setLanguage(currentLang); return;
                 }
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
             }, 1000);
-            
-            // --- Fade-in Animations on Scroll ---
-            const faders = document.querySelectorAll('.fade-in');
-            const appearOptions = {
-                threshold: 0.2,
-                rootMargin: "0px 0px -50px 0px"
-            };
 
-            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            // --- Animations on Scroll ---
+            const animateOnScroll = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    } else {
+                    if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        appearOnScroll.unobserve(entry.target);
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, appearOptions);
+            }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll('.fade-in').forEach(el => animateOnScroll.observe(el));
+            
+            // --- Factory Timeline ---
+            const factoryContainer = document.getElementById('factory-line-container');
+            const timeline = document.getElementById('factory-timeline');
 
-            faders.forEach(fader => {
-                appearOnScroll.observe(fader);
+            function buildFactoryTimeline() {
+                timeline.innerHTML = '<div class="timeline-line"><div id="timeline-progress" class="timeline-progress"></div></div><i id="hide-icon" class="fas fa-paw"></i>';
+                const steps = stepDetails[currentLang];
+                steps.forEach((step, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'timeline-item';
+                    item.dataset.step = index + 1;
+                    item.innerHTML = `<div class="timeline-dot"></div><div class="timeline-content"><i class="fas ${step.icon} text-3xl text-blue-400 mb-2"></i><h4 class="font-semibold">${step.title}</h4></div>`;
+                    timeline.appendChild(item);
+                    item.addEventListener('click', () => openModal(item.dataset.step));
+                });
+            }
+
+            factoryContainer.addEventListener('scroll', () => {
+                const scrollLeft = factoryContainer.scrollLeft;
+                const scrollWidth = factoryContainer.scrollWidth - factoryContainer.clientWidth;
+                const progress = (scrollLeft / scrollWidth) * 100;
+                
+                const progressLine = document.getElementById('timeline-progress');
+                const hideIcon = document.getElementById('hide-icon');
+                if(!progressLine || !hideIcon) return;
+
+                progressLine.style.width = `${progress}%`;
+                const timelineWidth = timeline.offsetWidth;
+                const iconPosition = (scrollLeft / scrollWidth) * (timelineWidth - 125) + 125;
+                hideIcon.style.left = `${iconPosition}px`;
+                
+                const items = timeline.querySelectorAll('.timeline-item');
+                const itemWidth = items.length > 0 ? items[0].offsetWidth : 250;
+                const activeIndex = Math.floor((iconPosition - (itemWidth/2)) / itemWidth);
+                items.forEach((item, index) => item.classList.toggle('active', index === activeIndex));
             });
+            
+            // --- Modal Logic ---
+            const modal = document.getElementById('step-modal');
+            const modalOverlay = modal.closest('.modal-overlay');
+            const modalContent = modal.querySelector('.modal-content');
+            const modalIcon = document.getElementById('modal-icon');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalCloseBtn = document.getElementById('modal-close');
+
+            function openModal(step) {
+                const details = stepDetails[currentLang][step - 1];
+                modalIcon.className = `fas ${details.icon} text-blue-400 text-6xl mb-4`;
+                modalTitle.textContent = details.title;
+                modalDescription.textContent = details.desc;
+                
+                modalOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    modalOverlay.classList.remove('opacity-0');
+                    modalContent.classList.remove('opacity-0', '-translate-y-10');
+                }, 10);
+            }
+
+            function closeModal() {
+                modalOverlay.classList.add('opacity-0');
+                modalContent.classList.add('opacity-0', '-translate-y-10');
+                setTimeout(() => modalOverlay.classList.add('hidden'), 300);
+            }
+
+            modalCloseBtn.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+            
+            // --- Investment Calculator ---
+            const slider = document.getElementById('investment-slider');
+            const amountDisplay = document.getElementById('investment-amount');
+            const jobsContainer = document.getElementById('jobs-impact');
+            const spaceContainer = document.getElementById('space-impact');
+            const maxJobs = 50;
+            const maxSpace = 100;
+            
+            for(let i=0; i<maxJobs; i++) { jobsContainer.innerHTML += '<i class="fas fa-user impact-icon"></i>'; }
+            for(let i=0; i<maxSpace; i++) { spaceContainer.innerHTML += '<i class="fas fa-th impact-icon"></i>'; }
+            
+            const jobIcons = jobsContainer.querySelectorAll('.impact-icon');
+            const spaceIcons = spaceContainer.querySelectorAll('.impact-icon');
+
+            function updateImpact(value) {
+                const investment = value * 200000; // Max 20M Som
+                amountDisplay.textContent = `${investment.toLocaleString()} SOM`;
+                
+                const jobsToShow = Math.ceil((value / 100) * maxJobs);
+                jobIcons.forEach((icon, index) => {
+                    icon.style.color = index < jobsToShow ? '#34d399' : '#475569';
+                    icon.style.transform = index < jobsToShow ? 'scale(1.1)' : 'scale(1)';
+                });
+
+                const spaceToShow = Math.ceil((value / 100) * maxSpace);
+                spaceIcons.forEach((icon, index) => {
+                    icon.style.color = index < spaceToShow ? '#60a5fa' : '#475569';
+                     icon.style.transform = index < spaceToShow ? 'scale(1.1)' : 'scale(1)';
+                });
+            }
+
+            slider.addEventListener('input', (e) => updateImpact(e.target.value));
+            
+            // Initial setup
+            setLanguage(currentLang);
+            updateImpact(slider.value);
         });
     </script>
 </body>
