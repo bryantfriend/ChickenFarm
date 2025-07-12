@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrgyz Agroholding - The Future of Kyrgyz Industry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x1080/334155/e2e8f0?text=Modern+Agro-Industry');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .parallax-bg {
+            background-image: url('https://placehold.co/1200x800/475569/e2e8f0?text=Technopark+Site+Plan');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            background-color: #1e40af; /* A darker blue on hover */
+        }
+        .stat-card {
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+        [data-lang] { display: none; }
+        [data-lang="en"].active { display: block; }
+        [data-lang-inline] { display: none; }
+        [data-lang-inline="en"].active { display: inline; }
+        .lang-flag {
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            opacity: 0.7;
+            border: 2px solid transparent;
+        }
+        .lang-flag.selected {
+            transform: scale(1.2);
+            opacity: 1;
+            border-color: #3b82f6;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white">
+
+    <!-- Header -->
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50 py-4 px-4 md:px-8 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold tracking-tight text-blue-400">
+                <i class="fas fa-leaf mr-2"></i>Kyrgyz Agroholding
+            </h1>
+            <div class="flex items-center space-x-4">
+                <img src="https://flagcdn.com/gb.svg" width="30" alt="English" class="lang-flag rounded-full" data-lang-switch="en">
+                <img src="https://flagcdn.com/ru.svg" width="30" alt="Russian" class="lang-flag rounded-full" data-lang-switch="ru">
+                <img src="https://flagcdn.com/kg.svg" width="30" alt="Kyrgyz" class="lang-flag rounded-full" data-lang-switch="kg">
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen flex flex-col justify-center items-center text-center p-4 -mt-20">
+        <div class="max-w-4xl">
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider fade-in">
+                <span data-lang-inline="en" class="active">Forging a New Era</span>
+                <span data-lang-inline="ru">Создавая новую эру</span>
+                <span data-lang-inline="kg">Жаңы доорду түзүү</span>
+            </h2>
+            <p class="mt-4 text-lg md:text-2xl text-blue-300 font-light max-w-2xl mx-auto fade-in" style="transition-delay: 200ms;">
+                <span data-lang-inline="en" class="active">A 2 billion som investment creating 500 jobs and revolutionizing our nation's industrial landscape.</span>
+                <span data-lang-inline="ru">Инвестиции в 2 миллиарда сомов создадут 500 рабочих мест и произведут революцию в промышленном ландшафте нашей страны.</span>
+                <span data-lang-inline="kg">2 миллиард сомдук инвестиция 500 жумуш ордун түзүп, өлкөбүздүн өнөр жай ландшафтын өзгөртөт.</span>
+            </p>
+        </div>
+        <div id="countdown" class="mt-12 text-center fade-in" style="transition-delay: 400ms;">
+            <h3 class="text-2xl font-bold text-white mb-4">
+                <span data-lang-inline="en" class="active">Grand Opening Countdown</span>
+                <span data-lang-inline="ru">Обратный отсчет до открытия</span>
+                <span data-lang-inline="kg">Ачылышына чейинки эсеп</span>
+            </h3>
+            <div class="grid grid-cols-4 gap-4 text-white max-w-lg mx-auto">
+                <div class="bg-white/10 p-4 rounded-lg">
+                    <div id="days" class="text-4xl font-bold">0</div>
+                    <div data-lang-inline="en" class="active">Days</div>
+                    <div data-lang-inline="ru">Дней</div>
+                    <div data-lang-inline="kg">Күн</div>
+                </div>
+                <div class="bg-white/10 p-4 rounded-lg">
+                    <div id="hours" class="text-4xl font-bold">0</div>
+                    <div data-lang-inline="en" class="active">Hours</div>
+                    <div data-lang-inline="ru">Часов</div>
+                    <div data-lang-inline="kg">Саат</div>
+                </div>
+                <div class="bg-white/10 p-4 rounded-lg">
+                    <div id="minutes" class="text-4xl font-bold">0</div>
+                    <div data-lang-inline="en" class="active">Minutes</div>
+                    <div data-lang-inline="ru">Минут</div>
+                    <div data-lang-inline="kg">Мүнөт</div>
+                </div>
+                <div class="bg-white/10 p-4 rounded-lg">
+                    <div id="seconds" class="text-4xl font-bold">0</div>
+                    <div data-lang-inline="en" class="active">Seconds</div>
+                    <div data-lang-inline="ru">Секунд</div>
+                    <div data-lang-inline="kg">Секунд</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="py-20 bg-slate-800">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in">
+                    <span data-lang-inline="en" class="active">A Vision for a Modern Technopark</span>
+                    <span data-lang-inline="ru">Видение современного технопарка</span>
+                    <span data-lang-inline="kg">Заманбап технопарктын көрүнүшү</span>
+                </h2>
+                <p class="text-lg text-slate-300 mb-12 fade-in">
+                    <span data-lang-inline="en" class="active">We're not just building a factory; we're building a future. The Kyrgyz Agroholding Technopark will rise as a beacon of innovation and opportunity.</span>
+                    <span data-lang-inline="ru">Мы строим не просто завод; мы строим будущее. Технопарк «Кыргыз Агрохолдинг» станет маяком инноваций и возможностей.</span>
+                    <span data-lang-inline="kg">Биз жөн гана завод курбайбыз; биз келечекти куруп жатабыз. "Кыргыз Агрохолдинг" технопаркы инновациялардын жана мүмкүнчүлүктөрдүн маягы болуп калат.</span>
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Stat Card -->
+                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
+                    <i class="fas fa-ruler-combined text-blue-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold">105 <span data-lang-inline="en" class="active">ha</span><span data-lang-inline="ru">га</span><span data-lang-inline="kg">га</span></h3>
+                    <p class="text-slate-300"><span data-lang-inline="en" class="active">Technopark Area</span><span data-lang-inline="ru">Площадь технопарка</span><span data-lang-inline="kg">Технопарктын аянты</span></p>
+                </div>
+                <!-- Stat Card -->
+                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
+                    <i class="fas fa-users text-blue-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold">500</h3>
+                    <p class="text-slate-300"><span data-lang-inline="en" class="active">New Jobs</span><span data-lang-inline="ru">Новых рабочих мест</span><span data-lang-inline="kg">Жаңы жумуш орундары</span></p>
+                </div>
+                <!-- Stat Card -->
+                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
+                    <i class="fas fa-weight-hanging text-blue-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold">8.76M <span data-lang-inline="en" class="active">kg</span><span data-lang-inline="ru">кг</span><span data-lang-inline="kg">кг</span></h3>
+                    <p class="text-slate-300"><span data-lang-inline="en" class="active">Hides Processed Annually</span><span data-lang-inline="ru">Обработка шкур в год</span><span data-lang-inline="kg">Жылына иштетилген тери</span></p>
+                </div>
+                <!-- Stat Card -->
+                <div class="bg-slate-700 p-6 rounded-lg shadow-xl stat-card fade-in">
+                    <i class="fas fa-recycle text-blue-400 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold">4000 m³/<span data-lang-inline="en" class="active">day</span><span data-lang-inline="ru">день</span><span data-lang-inline="kg">күн</span></h3>
+                    <p class="text-slate-300"><span data-lang-inline="en" class="active">Water Treatment Capacity</span><span data-lang-inline="ru">Мощность очистки воды</span><span data-lang-inline="kg">Суу тазалоо кубаттуулугу</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Parallax Background Section -->
+    <section class="parallax-bg h-96"></section>
+
+    <!-- Asyl Teri Section -->
+    <section class="py-20 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in">
+                    <span data-lang-inline="en" class="active">The Heart of the Project: </span>
+                    <span data-lang-inline="ru">Сердце проекта: </span>
+                    <span data-lang-inline="kg">Долбоордун жүрөгү: </span>
+                    "Asyl Teri"
+                </h2>
+                <p class="text-lg text-slate-300 mb-4 fade-in">
+                    <span data-lang-inline="en" class="active">Blending traditional craftsmanship with cutting-edge technology to create world-class leather. Follow the journey from raw hide to finished product.</span>
+                    <span data-lang-inline="ru">Сочетание традиционного мастерства с передовыми технологиями для создания кожи мирового класса. Проследите путь от сырой шкуры до готового продукта.</span>
+                    <span data-lang-inline="kg">Дүйнөлүк класстагы булгаары жасоо үчүн салттуу чеберчиликти заманбап технологиялар менен айкалыштыруу. Чийки териден даяр продукцияга чейинки жолду байкаңыз.</span>
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Leather Process Steps -->
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">1</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Primary Processing</span>
+                        <span data-lang="ru">Первичная обработка</span>
+                        <span data-lang="kg">Баштапкы иштетүү</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">2</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Soaking</span>
+                        <span data-lang="ru">Отмока</span>
+                        <span data-lang="kg">Чылоо</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">3</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">De-hairing & Liming</span>
+                        <span data-lang="ru">Обезволашивание и золение</span>
+                        <span data-lang="kg">Түгүн алуу жана акиташтоо</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">4</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Fleshing</span>
+                        <span data-lang="ru">Мездрение</span>
+                        <span data-lang="kg">Эттендирүү</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">5</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Splitting</span>
+                        <span data-lang="ru">Двоение</span>
+                        <span data-lang="kg">Катмарга бөлүү</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">6</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Deliming & Pickling</span>
+                        <span data-lang="ru">Обеззоливание и пикелевание</span>
+                        <span data-lang="kg">Акиташсыздандыруу жана пикелдөө</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">7</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Tanning</span>
+                        <span data-lang="ru">Дубление</span>
+                        <span data-lang="kg">Ашатуу</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">8</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Wet-Blue Sorting</span>
+                        <span data-lang="ru">Сортировка Вет-блю</span>
+                        <span data-lang="kg">Вет-блю сорттоо</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">9</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Dyeing & Fatliquoring</span>
+                        <span data-lang="ru">Крашение и жирование</span>
+                        <span data-lang="kg">Боёо жана майлоо</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">10</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Drying</span>
+                        <span data-lang="ru">Сушка</span>
+                        <span data-lang="kg">Кургатуу</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">11</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Finishing & Coating</span>
+                        <span data-lang="ru">Отделка и покрытие</span>
+                        <span data-lang="kg">Аяктоо жана каптоо</span>
+                    </h4>
+                </div>
+                <div class="step-card bg-blue-800 p-4 rounded-lg text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-300 mb-2">12</div>
+                    <h4 class="font-semibold h-12 flex items-center justify-center">
+                        <span data-lang="en" class="active">Final Processing</span>
+                        <span data-lang="ru">Финальная обработка</span>
+                        <span data-lang="kg">Акыркы иштетүү</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Section -->
+    <section class="py-20 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-blue-400 mb-4 fade-in">
+                    <span data-lang-inline="en" class="active">Invest in Growth. Invest in Kyrgyzstan.</span>
+                    <span data-lang-inline="ru">Инвестируйте в рост. Инвестируйте в Кыргызстан.</span>
+                    <span data-lang-inline="kg">Өсүүгө инвестицияла. Кыргызстанга инвестицияла.</span>
+                </h2>
+                <p class="text-lg text-slate-300 mb-4 fade-in">
+                    <span data-lang-inline="en" class="active">A transparent and impactful investment opportunity in a vital sector of Kyrgyzstan's economy.</span>
+                    <span data-lang-inline="ru">Прозрачная и эффективная инвестиционная возможность в жизненно важном секторе экономики Кыргызстана.</span>
+                    <span data-lang-inline="kg">Кыргызстандын экономикасынын маанилүү секторуна ачык-айкын жана таасирдүү инвестициялык мүмкүнчүлүк.</span>
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-slate-700 p-8 rounded-lg fade-in">
+                    <i class="fas fa-coins text-yellow-400 text-5xl mb-4"></i>
+                    <p class="text-lg text-slate-400"><span data-lang-inline="en" class="active">Total Investment</span><span data-lang-inline="ru">Общие инвестиции</span><span data-lang-inline="kg">Жалпы инвестиция</span></p>
+                    <h3 class="text-4xl font-bold">2B <span data-lang-inline="en" class="active">SOM</span><span data-lang-inline="ru">сом</span><span data-lang-inline="kg">сом</span></h3>
+                </div>
+                <div class="bg-slate-700 p-8 rounded-lg fade-in">
+                    <i class="fas fa-dollar-sign text-green-400 text-5xl mb-4"></i>
+                    <p class="text-lg text-slate-400">"Asyl Teri" <span data-lang-inline="en" class="active">Tannery</span><span data-lang-inline="ru">завод</span><span data-lang-inline="kg">заводу</span></p>
+                    <h3 class="text-4xl font-bold">$12M</h3>
+                </div>
+                <div class="bg-slate-700 p-8 rounded-lg fade-in">
+                    <i class="fas fa-cogs text-sky-400 text-5xl mb-4"></i>
+                    <p class="text-lg text-slate-400"><span data-lang-inline="en" class="active">Production Equipment</span><span data-lang-inline="ru">Производственное оборудование</span><span data-lang-inline="kg">Өндүрүш жабдуулары</span></p>
+                    <h3 class="text-4xl font-bold">>$5M</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-8 text-center text-slate-400">
+        <p>&copy; 2025 Kyrgyz Agroholding. <span data-lang-inline="en" class="active">All Rights Reserved.</span><span data-lang-inline="ru">Все права защищены.</span><span data-lang-inline="kg">Бардык укуктар корголгон.</span></p>
+        <div class="mt-4">
+            <a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-facebook fa-2x"></i></a>
+            <a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-instagram fa-2x"></i></a>
+            <a href="#" class="text-slate-400 hover:text-blue-400 mx-2"><i class="fab fa-telegram fa-2x"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Language Switcher ---
+            const langSwitchers = document.querySelectorAll('[data-lang-switch]');
+            const langElements = document.querySelectorAll('[data-lang], [data-lang-inline]');
+            
+            function setLanguage(lang) {
+                // Set active flag
+                langSwitchers.forEach(switcher => {
+                    if (switcher.dataset.langSwitch === lang) {
+                        switcher.classList.add('selected');
+                    } else {
+                        switcher.classList.remove('selected');
+                    }
+                });
+
+                // Toggle content visibility
+                langElements.forEach(el => {
+                    if (el.dataset.lang === lang || el.dataset.langInline === lang) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.remove('active');
+                    }
+                });
+                localStorage.setItem('preferredLanguage', lang);
+            }
+
+            langSwitchers.forEach(switcher => {
+                switcher.addEventListener('click', () => {
+                    setLanguage(switcher.dataset.langSwitch);
+                });
+            });
+
+            // Set initial language from storage or default to 'en'
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
+            setLanguage(preferredLanguage);
+
+
+            // --- Countdown Timer ---
+            const countdownDate = new Date("July 1, 2026 00:00:00").getTime();
+
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdown").innerHTML = `<h3 class="text-3xl font-bold text-green-400">
+                        <span data-lang-inline="en" class="active">We are open!</span>
+                        <span data-lang-inline="ru">Мы открыты!</span>
+                        <span data-lang-inline="kg">Биз ачыкпыз!</span>
+                    </h3>`;
+                    setLanguage(localStorage.getItem('preferredLanguage') || 'en'); // Re-apply lang after innerHTML change
+                }
+            }, 1000);
+            
+            // --- Fade-in Animations on Scroll ---
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.2,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+</body>
+</html>
